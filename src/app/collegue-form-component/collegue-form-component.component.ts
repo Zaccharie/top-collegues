@@ -17,11 +17,11 @@ export class CollegueFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let c1 = new Collegue("Zaccharie", "igmUrl", 100);
-    let c2 = new Collegue("Jordan", "igmUrl", 80);
-    let c3 = new Collegue("Leila", "igmUrl", 10);
-    let c4 = new Collegue("Rémi", "igmUrl", 20);
-    let c5 = new Collegue("Vincent", "igmUrl", 95);
+    let c1 = new Collegue("Zaccharie", "assets/namelessG.jpg", 100);
+    let c2 = new Collegue("Jordan", "assets/namelessG.jpg", 80);
+    let c3 = new Collegue("Leila", "assets/namelessG.jpg", 10);
+    let c4 = new Collegue("Rémi", "assets/namelessG.jpg", 20);
+    let c5 = new Collegue("Vincent", "assets/namelessG.jpg", 95);
     this.collegues.push(c1, c2, c3, c4, c5);
   }
 
