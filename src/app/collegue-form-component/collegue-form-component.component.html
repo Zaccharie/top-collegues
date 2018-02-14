@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Top Collègues</h1>
+  <p>Les meilleurs collègues du moment</p>
+  <br/>
+  <form>
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Pseudo</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputPseudo" placeholder="Pseudo" #pseudo>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">URL image</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputURLImage" placeholder="URL image" #imageUrl>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button class="btn btn-primary" (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
+      </div>
+    </div>
+  </form>
+
+  <p>
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = false">
+      Le collegue {{pseudoSauvegarde}} a bien été ajouté
+    </ngb-alert>
+  </p>
+
+  <div class="row">
+    <div *ngFor="let co of collegues" class="col">
+      <app-un-collegue [collegue]=co></app-un-collegue>
+    </div>
+  </div>
+</div>
