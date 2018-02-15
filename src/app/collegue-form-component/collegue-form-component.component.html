@@ -27,10 +27,17 @@
       Le collegue {{pseudoSauvegarde}} a bien été ajouté
     </ngb-alert>
   </p>
+  <p>
+    <ngb-alert *ngIf="pseudoErrorMessage" type="danger" (close)="pseudoErrorMessage = false">
+      Ce pseudo est déjà utilisé
+    </ngb-alert>
+  </p>
 
-  <div class="row">
+
+  <div class="row h-100 justify-content-center align-items-center">
     <div *ngFor="let co of collegues" class="col-md-auto col-xs-12 col-sm-auto col-lg-auto">
       <app-un-collegue [collegue]=co></app-un-collegue>
     </div>
   </div>
+
 </div>

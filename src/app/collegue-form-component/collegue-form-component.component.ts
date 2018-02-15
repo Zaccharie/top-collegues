@@ -13,6 +13,7 @@ export class CollegueFormComponent implements OnInit {
   collegues: Collegue[] = [];
   messageTimeOut: number;
   successMessage: boolean = false;
+  pseudoErrorMessage: boolean = false;
   pseudoSauvegarde: string
 
   constructor(private collService: CollegueService) { }
@@ -27,7 +28,7 @@ export class CollegueFormComponent implements OnInit {
     this.collService.sauvegarder(newCollegue)
       .then(tabCollegues => {
         this.collegues = tabCollegues;
-        
+
         //sauvegarde du pseudo pour le message d'alerte
         this.pseudoSauvegarde = pseudo.value;
 
@@ -38,9 +39,9 @@ export class CollegueFormComponent implements OnInit {
         pseudo.value = "";
         imageUrl.value = "";
       })
-      .catch(() => alert("Ce pseudo est déjà utilisé"));
-
-
+      .catch((Status) => {
+        this.pseudoErrorMessage = true;
+      });
 
     return false; //pour éviter le rechargement de la page
   }
