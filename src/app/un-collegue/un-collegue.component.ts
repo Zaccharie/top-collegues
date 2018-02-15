@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from "../shared/domain/collegue";
+import { CollegueService } from '../shared/service/collegue.service';
 
 @Component({
   selector: 'app-un-collegue',
@@ -11,17 +12,19 @@ export class UnCollegueComponent implements OnInit {
   //parametre d'entrée "collegue"
   @Input() collegue:Collegue;
 
-  constructor() { }
+  constructor(private collService: CollegueService) { }
 
   ngOnInit() {
   }
 
   jaime(){
-    this.collegue.score = this.collegue.score + 10; 
+    this.collService.aimerUnCollegue(this.collegue)
+      .then(collegueUpdate => this.collegue = collegueUpdate); 
   }
 
   jedeteste(){
-    this.collegue.score = this.collegue.score - 10; 
+    this.collService.detesterUnCollegue(this.collegue)
+      .then(collegueUpdate => this.collegue = collegueUpdate); 
   }
 
 }
