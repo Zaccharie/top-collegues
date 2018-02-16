@@ -1,11 +1,13 @@
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" [src]="collegue.imgUrl" alt="Card image cap">
-    <div class="card-body" style="text-align: center">
-      <h5 class="card-title">{{collegue.nom}}</h5>
-      <p class="card-text">{{collegue.score}}</p>
-      <div class="row justify-content-md-center">
-        <a href="#" class="btn btn-outline-primary" (click)="jaime()">J'aime</a>
-        <a href="#" class="btn btn-outline-danger" (click)="jedeteste()">Je déteste</a>
-      </div>
+  <a routerLink="/detail/{{collegue.nom}}" class="nav-item nav-link" style="padding:0%">
+    <img class="card-img-top" [src]="collegue.imgUrl" alt="Card image cap">
+  </a>
+  <div class="card-body" style="text-align: center">
+    <h5 class="card-title">{{collegue.nom}}</h5>
+    <p class="card-text">{{collegue.score}}</p>
+    <div class="row justify-content-md-center">
+      <app-like-button [collegue]="collegue" (change)="nouveauJaime()"></app-like-button>
+      <app-dislike-button [collegue]="collegue" (change)="nouveauDeteste()"></app-dislike-button>
     </div>
+  </div>
 </div>

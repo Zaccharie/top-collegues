@@ -1,0 +1,11 @@
+<div class="card">
+  <img class="card-img-top" [src]="collegue?.imgUrl" alt="Card image cap">
+  <div class="card-body" style="text-align: center">
+    <h5 class="card-title">{{collegue?.nom}}</h5>
+    <p class="card-text">{{collegue?.score}}</p>
+    <div class="row justify-content-md-center">
+      <app-like-button [collegue]="collegue" (change)="nouveauJaime(collegue)"></app-like-button>
+      <app-dislike-button [collegue]="collegue" (change)="nouveauDeteste(collegue)"></app-dislike-button>
+    </div>
+  </div>
+</div> 

@@ -12,19 +12,21 @@ export class UnCollegueComponent implements OnInit {
   //parametre d'entrée "collegue"
   @Input() collegue:Collegue;
 
+  collegues:Collegue[]
+
   constructor(private collService: CollegueService) { }
 
   ngOnInit() {
+    this.collService.listerCollegues()
+    .then(tabCollegues => this.collegues = tabCollegues);
   }
 
-  jaime(){
-    this.collService.aimerUnCollegue(this.collegue)
-      .then(collegueUpdate => this.collegue = collegueUpdate); 
+  nouveauJaime(){
+    this.collegue.score += 10;
   }
 
-  jedeteste(){
-    this.collService.detesterUnCollegue(this.collegue)
-      .then(collegueUpdate => this.collegue = collegueUpdate); 
+  nouveauDeteste(){
+    this.collegue.score -= 10;
   }
 
 }

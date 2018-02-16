@@ -1,0 +1,15 @@
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let co of collegues">
+      <a routerLink="/detail/{{co.nom}}" class="nav-item nav-link" style="padding:0%">
+        <img src="{{co.imgUrl}}" alt="Random first slide" style="width:100%">
+      </a>
+    <div class="carousel-caption">
+      <h1>{{co.score}}</h1>
+      <h3>{{co.nom}}</h3>
+      <p>
+        <app-like-button [collegue]="co" (change)="nouveauJaime(co)"></app-like-button>
+        <app-dislike-button [collegue]="co" (change)="nouveauDeteste(co)"></app-dislike-button>
+      </p>
+    </div>
+  </ng-template>
+</ngb-carousel>

@@ -27,4 +27,9 @@ export class CollegueService {
     return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.nom}`, array).toPromise();
   }
 
+  afficherCollegue(nom:string):Promise<Collegue>{
+    return this.http.get<Collegue>(`http://localhost:8080/collegues/detail/${nom}`).toPromise()
+      .then(collegue => collegue = new Collegue(collegue.nom, collegue.imgUrl, collegue.score));
+  }
+
 }

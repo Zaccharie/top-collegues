@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../shared/domain/collegue';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 import { CollegueService } from '../shared/service/collegue.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collegue-form-component',
@@ -14,9 +15,9 @@ export class CollegueFormComponent implements OnInit {
   messageTimeOut: number;
   successMessage: boolean = false;
   pseudoErrorMessage: boolean = false;
-  pseudoSauvegarde: string
+  pseudoSauvegarde: string;
 
-  constructor(private collService: CollegueService) { }
+  constructor(private collService: CollegueService, private router:Router) { }
 
   ngOnInit() {
     this.collService.listerCollegues()
@@ -44,6 +45,10 @@ export class CollegueFormComponent implements OnInit {
       });
 
     return false; //pour éviter le rechargement de la page
+  }
+
+  afficherFormAndNav(){
+    return ['/tableau', '/classique', '/caroussel'].some(route => route == this.router.url);
   }
 
 }

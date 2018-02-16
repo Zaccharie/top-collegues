@@ -1,0 +1,25 @@
+<table class="table table-responsive">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Pseudo</th>
+      <th scope="col">Score</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let co of collegues">
+      <th scope="row" style="width: 10%">
+        <a routerLink="/detail/{{co.nom}}" class="nav-item nav-link" style="padding:0%">
+          <img class="img-thumbnail" src={{co.imgUrl}} alt="img">
+        </a>
+      </th>
+      <td>{{co.nom}}</td>
+      <td>{{co.score}}</td>
+      <td>
+        <app-like-button [collegue]="co" (change)="nouveauJaime()"></app-like-button>
+        <app-dislike-button [collegue]="co" (change)="nouveauDeteste()"></app-dislike-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
