@@ -17,6 +17,7 @@ import { CollegueCarousselComponent } from './collegue-caroussel/collegue-carous
 import { LikeButtonComponent } from './like-button/like-button.component';
 import { DislikeButtonComponent } from './dislike-button/dislike-button.component';
 import { CollegueDetailComponent } from './collegue-detail/collegue-detail.component';
+import { ScorePipe } from './shared/pipe/score.pipe';
 
 const appRoutes: Routes = [
   {path:'classique', component:CollegueClassiqueComponent},
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     LikeButtonComponent,
     DislikeButtonComponent,
     CollegueDetailComponent,
+    ScorePipe,
   ],
   imports: [
     BrowserModule,
