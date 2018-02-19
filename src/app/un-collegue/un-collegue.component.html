@@ -3,7 +3,7 @@
     <img class="card-img-top" [src]="collegue.imgUrl" alt="Card image cap">
   </a>
   <div class="card-body" style="text-align: center">
-    <h5 class="card-title">{{collegue.nom}}</h5>
+    <h5 class="card-title">{{collegue.nom | uppercase}}</h5>
     <p class="card-text">{{collegue.score}}</p>
     <div class="row justify-content-md-center">
       <app-like-button [collegue]="collegue" (change)="nouveauJaime()"></app-like-button>

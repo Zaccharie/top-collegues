@@ -14,7 +14,7 @@
           <img class="img-thumbnail" src={{co.imgUrl}} alt="img">
         </a>
       </th>
-      <td>{{co.nom}}</td>
+      <td>{{co.nom | uppercase}}</td>
       <td>{{co.score}}</td>
       <td>
         <app-like-button [collegue]="co" (change)="nouveauJaime()"></app-like-button>
