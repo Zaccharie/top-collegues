@@ -9,8 +9,9 @@ import { CollegueService } from '../shared/service/collegue.service';
 })
 export class CollegueClassiqueComponent implements OnInit {
   
-  collegues:Collegue[];
-  limiteAffichage:string;
+  collegues:Collegue[] = [];
+  limiteAffichage:string = "0";
+  pseudoSearch:string = "";
 
   constructor(private collService: CollegueService) { }
 
@@ -21,8 +22,11 @@ export class CollegueClassiqueComponent implements OnInit {
   }
 
   limit(nombre:HTMLInputElement){
-    console.log(nombre);
-    this.limiteAffichage = nombre.value;
+    this.limiteAffichage = nombre.value.toString();
+  }
+
+  filterSearch(pseudoChar:HTMLInputElement){
+    this.pseudoSearch = pseudoChar.value.toString();
   }
 
 }

@@ -1,12 +1,19 @@
-<div class="input-group">
-  <span class="input-group-btn">
-    <button class="btn btn-secondary" type="button" (click)="limit(nombre)">Limite</button>
-  </span>
-  <input type="text" class="form-control" placeholder="" #nombre>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Limite</span>
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" (keyup)="limit(nombre)" #nombre>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Filtrer par pseudo</span>
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" (keyup)="filterSearch(pseudoChar)" #pseudoChar>
 </div>
 
 <div class="row h-100 justify-content-center align-items-center">
-  <div *ngFor="let co of collegues | slice:0:limiteAffichage" class="col-md-auto col-xs-12 col-sm-auto col-lg-auto">
+  <div *ngFor="let co of collegues | pseudo:pseudoSearch | slice:0:limiteAffichage" class="col-md-auto col-xs-12 col-sm-auto col-lg-auto">
     <app-un-collegue [collegue]=co></app-un-collegue>
   </div>
 </div>

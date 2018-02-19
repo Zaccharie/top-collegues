@@ -4,7 +4,7 @@
   </a>
   <div class="card-body" style="text-align: center">
     <h5 class="card-title">{{collegue.nom | uppercase}}</h5>
-    <p class="card-text">{{collegue.score | score }}</p>
+    <p class="card-text"><span [innerHtml]="collegue.score | score "></span></p>
     <div class="row justify-content-md-center">
       <app-like-button [collegue]="collegue" (change)="nouveauJaime()"></app-like-button>
       <app-dislike-button [collegue]="collegue" (change)="nouveauDeteste()"></app-dislike-button>

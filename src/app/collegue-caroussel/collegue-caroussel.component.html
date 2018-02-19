@@ -4,7 +4,7 @@
         <img src="{{co.imgUrl}}" alt="Random first slide" style="width:100%">
       </a>
     <div class="carousel-caption">
-      <h1>{{co.score}}</h1>
+      <h1><span [innerHtml]="co.score | score "></span></h1>
       <h3>{{co.nom | uppercase}}</h3>
       <p>
         <app-like-button [collegue]="co" (change)="nouveauJaime(co)"></app-like-button>

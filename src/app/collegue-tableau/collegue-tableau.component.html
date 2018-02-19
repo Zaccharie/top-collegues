@@ -1,11 +1,11 @@
-<div class="input-group">
-  <span class="input-group-btn">
-    <button class="btn btn-secondary" type="button" (click)="limit(nombre)">Limite</button>
-  </span>
-  <input type="text" class="form-control" placeholder="" #nombre>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">Limite</span>
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" (keyup)="limit(nombre)" #nombre>
 </div>
 
-<table class="table table-responsive">
+<table class="table table-responsive" *ngIf="showTable">
   <thead>
     <tr>
       <th scope="col"></th>
@@ -22,7 +22,7 @@
         </a>
       </th>
       <td>{{co.nom | uppercase}}</td>
-      <td>{{co.score}}</td>
+      <td><span [innerHtml]="co.score | score "></span></td>
       <td>
         <app-like-button [collegue]="co" (change)="nouveauJaime()"></app-like-button>
         <app-dislike-button [collegue]="co" (change)="nouveauDeteste()"></app-dislike-button>

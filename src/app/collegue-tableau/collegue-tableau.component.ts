@@ -9,30 +9,36 @@ import { CollegueService } from '../shared/service/collegue.service';
 })
 export class CollegueTableauComponent implements OnInit {
 
-  collegues:Collegue[];
-  limiteAffichage:string;
+  collegues: Collegue[];
+  limiteAffichage: string = "0";
+  showTable :boolean = true;
 
   constructor(private collService: CollegueService) { }
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues)
-    .then(() => this.limiteAffichage = this.collegues.length.toString() );
+      .then(tabCollegues => this.collegues = tabCollegues)
+      .then(() => this.limiteAffichage = this.collegues.length.toString());
   }
 
-  nouveauJaime(){
+  nouveauJaime() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+      .then(tabCollegues => this.collegues = tabCollegues);
   }
 
-  nouveauDeteste(){
+  nouveauDeteste() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+      .then(tabCollegues => this.collegues = tabCollegues);
   }
 
-  limit(nombre:HTMLInputElement){
-    console.log(nombre);
-    this.limiteAffichage = nombre.value;
+  limit(nombre: HTMLInputElement) {
+    if(nombre.value.toString() == "" || nombre.value.toString().startsWith(" ") || nombre.value.toString() == "0"){
+      this.showTable = false; //evite d'afficher les entetes du tableau
+    }
+    else{
+      this.showTable = true;
+      this.limiteAffichage = nombre.value.toString();
+    }
   }
 
 }
