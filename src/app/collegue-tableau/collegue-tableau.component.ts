@@ -10,12 +10,14 @@ import { CollegueService } from '../shared/service/collegue.service';
 export class CollegueTableauComponent implements OnInit {
 
   collegues:Collegue[];
+  limiteAffichage:string;
 
   constructor(private collService: CollegueService) { }
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+    .then(tabCollegues => this.collegues = tabCollegues)
+    .then(() => this.limiteAffichage = this.collegues.length.toString() );
   }
 
   nouveauJaime(){
@@ -26,6 +28,11 @@ export class CollegueTableauComponent implements OnInit {
   nouveauDeteste(){
     this.collService.listerCollegues()
     .then(tabCollegues => this.collegues = tabCollegues);
+  }
+
+  limit(nombre:HTMLInputElement){
+    console.log(nombre);
+    this.limiteAffichage = nombre.value;
   }
 
 }

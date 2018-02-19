@@ -1,3 +1,10 @@
+<div class="input-group">
+  <span class="input-group-btn">
+    <button class="btn btn-secondary" type="button" (click)="limit(nombre)">Limite</button>
+  </span>
+  <input type="text" class="form-control" placeholder="" #nombre>
+</div>
+
 <table class="table table-responsive">
   <thead>
     <tr>
@@ -8,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let co of collegues">
+    <tr *ngFor="let co of collegues | slice:0:limiteAffichage">
       <th scope="row" style="width: 10%">
         <a routerLink="/detail/{{co.nom}}" class="nav-item nav-link" style="padding:0%">
           <img class="img-thumbnail" src={{co.imgUrl}} alt="img">

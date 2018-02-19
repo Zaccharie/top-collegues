@@ -10,12 +10,19 @@ import { CollegueService } from '../shared/service/collegue.service';
 export class CollegueClassiqueComponent implements OnInit {
   
   collegues:Collegue[];
+  limiteAffichage:string;
 
   constructor(private collService: CollegueService) { }
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+    .then(tabCollegues => this.collegues = tabCollegues)
+    .then(() => this.limiteAffichage = this.collegues.length.toString());
+  }
+
+  limit(nombre:HTMLInputElement){
+    console.log(nombre);
+    this.limiteAffichage = nombre.value;
   }
 
 }
