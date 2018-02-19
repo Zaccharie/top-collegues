@@ -23,6 +23,9 @@ export class CollegueClassiqueComponent implements OnInit {
 
   limit(nombre:HTMLInputElement){
     this.limiteAffichage = nombre.value.toString();
+    if(this.limiteAffichage.length == 0){ //affiche les collegues si conditions limit sont effacées
+      this.limiteAffichage  = this.collegues.length.toString();
+    }
   }
 
   filterSearch(pseudoChar:HTMLInputElement){

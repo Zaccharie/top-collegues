@@ -8,14 +8,9 @@ export class PseudoPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let colleguesFilter = [];
 
-    value.forEach(co => {
-      if(co.nom.toLowerCase().startsWith(args.toLowerCase())){
-        colleguesFilter.push(co);
-      }
-      value = colleguesFilter;
-    });
+    colleguesFilter = value.filter(co => co.nom.toLowerCase().startsWith(args.toLowerCase()));
 
-    return value;
+    return colleguesFilter;
 
   }
 

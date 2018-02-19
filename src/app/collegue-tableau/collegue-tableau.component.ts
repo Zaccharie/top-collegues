@@ -11,7 +11,7 @@ export class CollegueTableauComponent implements OnInit {
 
   collegues: Collegue[];
   limiteAffichage: string = "0";
-  showTable :boolean = true;
+  showTable: boolean = true;
 
   constructor(private collService: CollegueService) { }
 
@@ -32,10 +32,15 @@ export class CollegueTableauComponent implements OnInit {
   }
 
   limit(nombre: HTMLInputElement) {
-    if(nombre.value.toString() == "" || nombre.value.toString().startsWith(" ") || nombre.value.toString() == "0"){
-      this.showTable = false; //evite d'afficher les entetes du tableau
+    console.log(nombre.value)
+    if (nombre.value.toString() == "" || nombre.value.toString().startsWith(" ")) {
+      this.showTable = true;
+      this.limiteAffichage = this.collegues.length.toString();
     }
-    else{
+    else if( nombre.value.toString() == "0"){
+      this.showTable = false;
+    }
+    else {
       this.showTable = true;
       this.limiteAffichage = nombre.value.toString();
     }
