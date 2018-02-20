@@ -20,8 +20,10 @@ export class DislikeButtonComponent implements OnInit {
 
   jedeteste(){
     this.collService.detesterUnCollegue(this.collegue)
-      .then(collegueUpdate => this.collegue = collegueUpdate)
-      .then(() => this.change.emit()); 
+      .subscribe(collegueUpdate => {
+        this.collegue = collegueUpdate;
+        this.change.emit();
+      })
   }
 
 }

@@ -19,6 +19,7 @@ import { DislikeButtonComponent } from './dislike-button/dislike-button.componen
 import { CollegueDetailComponent } from './collegue-detail/collegue-detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { PseudoPipe } from './shared/pipe/pseudo.pipe';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 const appRoutes: Routes = [
   {path:'classique', component:CollegueClassiqueComponent},
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     CollegueDetailComponent,
     ScorePipe,
     PseudoPipe,
+    VotreDernierAvisComponent,
   ],
   imports: [
     BrowserModule,

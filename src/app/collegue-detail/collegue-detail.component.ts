@@ -20,7 +20,7 @@ export class CollegueDetailComponent implements OnInit {
 
   ngOnInit() {
     this.collegueService.afficherCollegue(this.nomParam)
-      .then( co => this.collegue = co ); 
+      .subscribe( co => this.collegue = co );
   }
 
   nouveauJaime(collegue:Collegue){

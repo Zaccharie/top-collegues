@@ -10,20 +10,25 @@ import { CollegueService } from '../shared/service/collegue.service';
 export class CollegueCarousselComponent implements OnInit {
 
 
-  collegues:Collegue[];
+  collegues: Collegue[];
 
   constructor(private collService: CollegueService) { }
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+      .subscribe(tabCollegues => this.collegues = tabCollegues);
+
+    //Mise à jour du tableau de collegues et de la limite d'affichage
+    this.collService.getCollegueSubject().subscribe(tabCollegues => {
+                                            this.collegues = tabCollegues;
+                                          });
   }
 
-  nouveauJaime(collegue:Collegue){
+  nouveauJaime(collegue: Collegue) {
     collegue.score += 10;
   }
 
-  nouveauDeteste(collegue:Collegue){
+  nouveauDeteste(collegue: Collegue) {
     collegue.score -= 10;
   }
 

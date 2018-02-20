@@ -20,8 +20,10 @@ export class LikeButtonComponent implements OnInit {
 
   jaime(){
     this.collService.aimerUnCollegue(this.collegue)
-      .then(collegueUpdate => this.collegue = collegueUpdate)
-      .then(() => this.change.emit());
+      .subscribe(collegueUpdate => {
+        this.collegue = collegueUpdate;
+        this.change.emit()
+      })
   }
 
 }

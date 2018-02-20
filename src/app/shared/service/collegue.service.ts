@@ -1,35 +1,71 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CollegueService {
 
+  private collegueSubject = new Subject<Collegue[]>();
+  private avisSubject = new Subject<any>();
+
   constructor(private http:HttpClient) { }
 
-  listerCollegues():Promise<Collegue[]>{
-    return this.http.get<any[]>("http://localhost:8080/collegues").toPromise()
-      .then(tabCollegues => tabCollegues.map(col => new Collegue(col.nom,col.imgUrl, col.score))) ;
+  getCollegueSubject(): Observable<any> {
+    return this.collegueSubject.asObservable(); 
   }
 
-  sauvegarder(newCollegue:Collegue):Promise<Collegue[]>{
-    return this.http.post<Collegue[]>('http://localhost:8080/collegues', newCollegue).toPromise()
-      .then(tabCollegues => tabCollegues.map(col => new Collegue(col.nom, col.imgUrl, col.score)));
+  getAvisSubject(): Observable<any> {
+    return this.avisSubject.asObservable();
   }
 
-  aimerUnCollegue(unCollegue:Collegue):Promise<Collegue>{
+  listerCollegues():Observable<Collegue[]>{
+    return this.http.get<any[]>("http://localhost:8080/collegues");
+  }
+
+  sauvegarderBackup(newCollegue:Collegue):Observable<Collegue[]>{
+
+    const observableHttp =  this.http.post<Collegue[]>('http://localhost:8080/collegues', newCollegue);
+    
+    observableHttp.subscribe(v => {
+      this.collegueSubject.next(v)
+    }, err => this.collegueSubject.error(err));
+
+    return this.collegueSubject;
+  }
+
+  sauvegarder(newCollegue:Collegue):Observable<Collegue[]>{
+    return this.http.post<Collegue[]>('http://localhost:8080/collegues', newCollegue)
+            .map(tabCollegues => {
+              this.collegueSubject.next(tabCollegues)
+              return tabCollegues;
+            });
+  }
+
+  aimerUnCollegue(unCollegue:Collegue):Observable<Collegue>{
     let array = {"action":"aimer"}
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.nom}`, array).toPromise();
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.nom}`, array)
+            .map(collegue => {
+              let avis = {nom: collegue.nom, value:"jaime"};
+              this.avisSubject.next(avis);
+              return collegue;
+            });
   }
 
-  detesterUnCollegue(unCollegue:Collegue):Promise<Collegue>{
+  detesterUnCollegue(unCollegue:Collegue):Observable<Collegue>{
     let array = {"action":"detester"}
-    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.nom}`, array).toPromise();
+    return this.http.patch<Collegue>(`http://localhost:8080/collegues/${unCollegue.nom}`, array)
+            .map(collegue => {
+              let avis = {nom: collegue.nom, value:"deteste"};
+              this.avisSubject.next(avis);
+              return collegue;
+            });
   }
 
-  afficherCollegue(nom:string):Promise<Collegue>{
-    return this.http.get<Collegue>(`http://localhost:8080/collegues/detail/${nom}`).toPromise()
-      .then(collegue => collegue = new Collegue(collegue.nom, collegue.imgUrl, collegue.score));
+  afficherCollegue(nom:string):Observable<Collegue>{
+    return this.http.get<Collegue>(`http://localhost:8080/collegues/detail/${nom}`);
   }
 
 }

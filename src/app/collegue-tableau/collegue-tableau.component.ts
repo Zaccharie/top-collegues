@@ -17,18 +17,26 @@ export class CollegueTableauComponent implements OnInit {
 
   ngOnInit() {
     this.collService.listerCollegues()
-      .then(tabCollegues => this.collegues = tabCollegues)
-      .then(() => this.limiteAffichage = this.collegues.length.toString());
+      .subscribe(tabCollegues => {
+        this.collegues = tabCollegues;
+        this.limiteAffichage = this.collegues.length.toString();
+      })
+
+    //Mise à jour du tableau de collegues et de la limite d'affichage
+    this.collService.getCollegueSubject().subscribe(tabCollegues => {
+                                            this.collegues = tabCollegues;
+                                            this.limiteAffichage = this.collegues.length.toString();
+                                          });
   }
 
   nouveauJaime() {
     this.collService.listerCollegues()
-      .then(tabCollegues => this.collegues = tabCollegues);
+      .subscribe(tabCollegues => this.collegues = tabCollegues);
   }
 
   nouveauDeteste() {
     this.collService.listerCollegues()
-      .then(tabCollegues => this.collegues = tabCollegues);
+      .subscribe(tabCollegues => this.collegues = tabCollegues);
   }
 
   limit(nombre: HTMLInputElement) {
@@ -37,7 +45,7 @@ export class CollegueTableauComponent implements OnInit {
       this.showTable = true;
       this.limiteAffichage = this.collegues.length.toString();
     }
-    else if( nombre.value.toString() == "0"){
+    else if (nombre.value.toString() == "0") {
       this.showTable = false;
     }
     else {
@@ -45,5 +53,4 @@ export class CollegueTableauComponent implements OnInit {
       this.limiteAffichage = nombre.value.toString();
     }
   }
-
 }

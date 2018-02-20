@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../shared/domain/collegue';
 import { CollegueService } from '../shared/service/collegue.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-collegue-classique',
@@ -12,13 +13,24 @@ export class CollegueClassiqueComponent implements OnInit {
   collegues:Collegue[] = [];
   limiteAffichage:string = "0";
   pseudoSearch:string = "";
+  colleguesSub: Subscription;
 
-  constructor(private collService: CollegueService) { }
+  constructor(private collService: CollegueService) {
+    
+   }
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues)
-    .then(() => this.limiteAffichage = this.collegues.length.toString());
+    .subscribe(tabCollegues => {
+      this.collegues = tabCollegues;
+      this.limiteAffichage = this.collegues.length.toString();
+    })
+   
+    //Mise à jour du tableau de collegues et de la limite d'affichage
+    this.collService.getCollegueSubject().subscribe(tabCollegues => {
+                                            this.collegues = tabCollegues;
+                                            this.limiteAffichage = this.collegues.length.toString();
+                                          });
   }
 
   limit(nombre:HTMLInputElement){
@@ -30,6 +42,6 @@ export class CollegueClassiqueComponent implements OnInit {
 
   filterSearch(pseudoChar:HTMLInputElement){
     this.pseudoSearch = pseudoChar.value.toString();
-  }
+  } 
 
 }

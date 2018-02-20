@@ -18,7 +18,7 @@ export class UnCollegueComponent implements OnInit {
 
   ngOnInit() {
     this.collService.listerCollegues()
-    .then(tabCollegues => this.collegues = tabCollegues);
+    .subscribe(tabCollegues => this.collegues = tabCollegues);
   }
 
   nouveauJaime(){

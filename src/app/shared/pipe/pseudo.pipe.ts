@@ -11,7 +11,5 @@ export class PseudoPipe implements PipeTransform {
     colleguesFilter = value.filter(co => co.nom.toLowerCase().startsWith(args.toLowerCase()));
 
     return colleguesFilter;
-
   }
-
 }
