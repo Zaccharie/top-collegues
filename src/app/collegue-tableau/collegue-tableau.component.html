@@ -22,11 +22,29 @@
         </a>
       </th>
       <td>{{co.nom | uppercase}}</td>
-      <td><span [innerHtml]="co.score | score "></span></td>
+      <td>
+        <span [innerHtml]="co.score | score "></span>
+      </td>
       <td>
         <app-like-button [collegue]="co" (change)="nouveauJaime()"></app-like-button>
         <app-dislike-button [collegue]="co" (change)="nouveauDeteste()"></app-dislike-button>
+        <button class="btn btn-outline-success" (click)="open(content)">Rediger un commentaire</button>
       </td>
+
+      <!-- MODAL AVEC FORMULAIRE AVIS -->
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Votre avis</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6>Que pensez-vous de {{co.nom}} ?</h6>
+          <app-avis-form [collegue]="co" (enregistrer)="c('Close click')"></app-avis-form>
+        </div>
+      </ng-template>
+      
     </tr>
   </tbody>
 </table>
