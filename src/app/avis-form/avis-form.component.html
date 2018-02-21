@@ -1,0 +1,8 @@
+<form #avisForm="ngForm">
+  <textarea rows="3" class="form-control" #commentaire="ngModel" [(ngModel)]="avis.commentaire" [ngModelOptions]="{standalone: true}" minlength="10" required>
+  </textarea>
+  <p *ngIf="commentaire.invalid">Votre message doit contenir au minimum 10 caractères</p>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="submit()" type="button" [disabled]="commentaire.invalid">Enregistrer</button>
+  </div>
+</form>

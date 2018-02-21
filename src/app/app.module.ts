@@ -20,6 +20,9 @@ import { CollegueDetailComponent } from './collegue-detail/collegue-detail.compo
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { PseudoPipe } from './shared/pipe/pseudo.pipe';
 import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
+import { NetworkStatusComponent } from './network-status/network-status.component';
+import { FormsModule } from '@angular/forms';
+import { AvisFormComponent } from './avis-form/avis-form.component';
 
 const appRoutes: Routes = [
   {path:'classique', component:CollegueClassiqueComponent},
@@ -43,12 +46,15 @@ const appRoutes: Routes = [
     ScorePipe,
     PseudoPipe,
     VotreDernierAvisComponent,
+    NetworkStatusComponent,
+    AvisFormComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule.forRoot(), //integre le module NgbModule
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   providers: [CollegueService],
   bootstrap: [AppComponent]

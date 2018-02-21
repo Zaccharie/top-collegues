@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Collegue } from '../domain/collegue';
+import { Avis } from '../domain/avis';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CollegueService {
 
   private collegueSubject = new Subject<Collegue[]>();
+  private unCollegueSubject = new Subject<Collegue>();
   private avisSubject = new Subject<any>();
+  private isOnline: Observable<boolean>;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.isOnline = Observable.merge(
+      Observable.of(navigator.onLine),
+      Observable.fromEvent(window, 'online').map(() => true),
+      Observable.fromEvent(window, 'offline').map(() => false));
+   }
+
+  getNetworkStatus(){
+    return this.isOnline;
+  }
 
   getCollegueSubject(): Observable<any> {
     return this.collegueSubject.asObservable(); 
@@ -66,6 +79,14 @@ export class CollegueService {
 
   afficherCollegue(nom:string):Observable<Collegue>{
     return this.http.get<Collegue>(`http://localhost:8080/collegues/detail/${nom}`);
+  }
+
+  ajouterUnAvis(avis:Avis):Observable<Collegue>{
+    return this.http.post<Collegue>('http://localhost:8080/avis/', avis)
+      .map( collegue => {
+        this.unCollegueSubject.next(collegue);
+        return collegue;
+      })
   }
 
 }

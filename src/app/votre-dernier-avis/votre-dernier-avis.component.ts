@@ -11,6 +11,7 @@ export class VotreDernierAvisComponent implements OnInit {
   collegueNom:string = "";
   displayJaime:boolean = false;
   displayDeteste:boolean = false;
+  displayNoVote:boolean = true;
 
   constructor(private collService: CollegueService) { }
 
@@ -20,10 +21,12 @@ export class VotreDernierAvisComponent implements OnInit {
       this.collegueNom = collegue.nom;
       if(collegue.value == "jaime"){
         this.displayDeteste = false;
+        this.displayNoVote = false;
         this.displayJaime = true;
       }
       else if(collegue.value == "deteste"){
         this.displayJaime = false;
+        this.displayNoVote = false;
         this.displayDeteste = true;
       }
     });
